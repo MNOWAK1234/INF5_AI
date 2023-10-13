@@ -12,49 +12,41 @@
         :parameters (?skad ?dokad)
         :precondition
         (and
-            (robot skad)
-            (not(paczka dokad))
+            (robot ?skad)
+            (not(paczka ?dokad))
 			(or
-                (poziomo skad dokad)
-                (pionowo skad dokad)
+                (poziomo ?skad ?dokad)
+                (pionowo ?skad ?dokad)
             )
 		)
 		:effect
 		(and
-			(not(robot skad))
-            (robot dokad)
+			(not(robot ?skad))
+            (robot ?dokad)
 		)
     )
     (:action pchaj 
-        :parameters (?skad ?dokad ?nowe)
+        :parameters (?skad ?dokad)
         :precondition
         (and
-			(robot skad)
-            (paczka dokad)
+			(robot ?skad)
+            (paczka ?dokad)
             (or
                 (and
-                    (poziomo skad dokad)
+                    (poziomo ?skad ?dokad)
                     (exists (?nowe) (and
                         (poziomo dokad ?nowe)
                         (not(= skad ?nowe))
                         (not(paczka ?nowe))
                     ))
                 )
-                (and
-                    (pionowo skad dokad)
-                    (exists (?nowe) (and
-                        (pionowo dokad ?nowe)
-                        (not(= skad ?nowe))
-                        (not(paczka ?nowe))
-                    ))
-                )
             )
 		)
 		:effect
 		(and
-			(not(robot skad))
-            (robot dokad)
-            (not(paczka dokad))
+			(not(robot ?skad))
+            (robot ?dokad)
+            (not(paczka ?dokad))
             (paczka ?nowe)
 		)
     )
