@@ -35,8 +35,16 @@
                 (and
                     (poziomo ?skad ?dokad)
                     (exists (?nowe) (and
-                        (poziomo dokad ?nowe)
-                        (not(= skad ?nowe))
+                        (poziomo ?dokad ?nowe)
+                        (not(= ?skad ?nowe))
+                        (not(paczka ?nowe))
+                    ))
+                )
+		(and
+                    (pionowe ?skad ?dokad)
+                    (exists (?nowe) (and
+                        (pionowo ?dokad ?nowe)
+                        (not(= ?skad ?nowe))
                         (not(paczka ?nowe))
                     ))
                 )
