@@ -31,22 +31,20 @@
         (and
 			(robot ?skad)
             (paczka ?dokad)
-            (or
-                (and
-                    (poziomo ?skad ?dokad)
-                    (exists (?nowe) (and
+            (exists (?nowe) 
+                (or
+                    (and
+                        (poziomo ?skad ?dokad)
                         (poziomo ?dokad ?nowe)
                         (not(= ?skad ?nowe))
                         (not(paczka ?nowe))
-                    ))
-                )
-		(and
-                    (pionowe ?skad ?dokad)
-                    (exists (?nowe) (and
+                    )
+                    (and
+                        (pionowo ?skad ?dokad)
                         (pionowo ?dokad ?nowe)
                         (not(= ?skad ?nowe))
                         (not(paczka ?nowe))
-                    ))
+                    )
                 )
             )
 		)
@@ -58,5 +56,4 @@
             (paczka ?nowe)
 		)
     )
-
 )
