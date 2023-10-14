@@ -160,12 +160,13 @@
 (cel f_18_9)
 (cel f_18_10)
 )
-(:goal (and
-(paczka f_17_8)
-(paczka f_17_9)
-(paczka f_17_10)
-(paczka f_18_8)
-(paczka f_18_9)
-(paczka f_18_10)
-))
+(:goal
+  (and
+    (paczka f_17_8)
+    (paczka f_17_9)
+    (paczka f_17_10)
+    (paczka f_18_8)
+    (paczka f_18_9)
+    (paczka f_18_10)
+  ))
 )
