@@ -18,6 +18,12 @@
         (bigger k3 k2)
         (bigger k3 k1)
         (bigger k2 k1)
+        
+        (bigger k1 k1)
+        (bigger k2 k2)
+        (bigger k3 k3)
+        (bigger k4 k4)
+        (bigger k5 k5)
 	)
 	(:goal
 		(and
