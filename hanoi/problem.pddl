@@ -1,7 +1,7 @@
 (define (problem Hanoi)
 	(:domain towers)
-	(:objects k1 k2 k3 k4 k5 - blocks
-            x y z - rods)
+	(:objects k1 k2 k3 k4 k5 - disk
+            x y z - rod)
 	(:init
 		(on-rod k1 x)
 		(on-rod k2 x)
