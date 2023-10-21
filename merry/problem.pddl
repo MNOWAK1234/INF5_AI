@@ -101,6 +101,7 @@
 		    (postawiony klocek6 pole6)
 		    (postawiony klocek7 pole7)
 		    (postawiony klocek8 pole8)
+            (human g)
 		)
 	)
 )
