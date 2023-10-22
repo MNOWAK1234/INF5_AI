@@ -7,7 +7,6 @@
 		(clear ?x)
         (hold ?x)
 	)
-    ; podnies paczke
     (:action podnies-z-paczki 
         :parameters (?gora ?dol)
         :precondition
@@ -24,7 +23,6 @@
             (not (clear ?gora))
 		)
     )
-
 
     (:action podnies-z-podlogi 
         :parameters (?klocek)
