@@ -7,11 +7,7 @@
 		(rozwiaz ?x - pomieszczenie)
         (postawiony ?x - klocek ?y - pole)
         (somsiad ?x ?y - pole)
-        (zielone ?x ?y - pomieszczenie)
-        (czerwone ?x ?y - pomieszczenie)
-        (pomaranczowe ?x ?y - pomieszczenie)
-        (niebieskie ?x ?y - pomieszczenie)
-        (rozowe ?x ?y - pomieszczenie)
+        (przejscie ?k - kolor ?x ?y - pomieszczenie)
         (barwa ?x - pilka ?y - kolor)
         (ball ?x - pilka ?y - pomieszczenie)
         (moge-isc ?x ?y - pomieszczenie)
@@ -21,12 +17,13 @@
         :parameters (?k - klocek)
         :precondition
         (and
-            (exist (?skad - pole) (postawiony ?k ?skad)
-            (exist (?dokad - pole) 
+            (exists (?skad - pole) (postawiony ?k ?skad))
+            (exists (?dokad - pole) 
                 (and
                     (somsiad ?skad ?dokad)
-                    (not(exist (?block - klocek) (postawiony ?block ?dokad)))
+                    (not(exists (?block - klocek) (postawiony ?block ?dokad)))
                 )
+            )
 		)
 		:effect
 		(and
@@ -39,7 +36,8 @@
         :parameters (?dokad - pomieszczenie)
         :precondition
         (and
-            exist (?from ?to - pomieszczenie)
+            (exists (?skad - pomieszczenie) (human ?skad))
+            (exists (?col - pomieszczenie) (przejscie ?col ?skad ?dokad))
         )
         :effect
 		(and
@@ -52,12 +50,29 @@
         :parameters (?col - kolor)
         :precondition
         (and
-            
+            (exists (?room - pomieszczenie) (human ?room))
+            (exists (?p - pilka) 
+                (and
+                    (barwa ?p ?col)
+                    (ball ?p ?room)
+                )
+            )
         )
         :effect
 		(and
-			(not(human ?skad))
-            (human ?dokad)
+			(not(ball ?p ?room))
+            (when 
+		        (exists (?pierwszy - pomieszczenie)
+                    (exists (?drugi - pomieszczenie) 
+                        (and
+                            (przejscie ?col ?pierwszy ?drugi)
+                            (not (= ?pierwszy ?drugi))
+                            (not (moge-isc ?pierwszy ?drugi))
+                        )
+                    )
+                );; warunek
+		        (moge-isc ?pierwszy ?drugi) ;; akcja
+	        )
 		)
     )
 
