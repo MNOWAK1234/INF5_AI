@@ -18,10 +18,12 @@
 	(:goal
 		(and
             (exists (?paczka) (on-floor ?paczka))
-            (not(exists (?druga) (and
-                (on-floor ?druga)
-                (not(= ?druga ?paczka))
-            )))
+            (not(exists (?druga)
+		(and
+                	(on-floor ?druga)
+                	(not(= ?druga ?paczka))
+            	)
+	))
             (not(exists (?trzymana) (hold ?trzymana)))
 		)
 	)
