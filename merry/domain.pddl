@@ -17,19 +17,29 @@
         :parameters (?k - klocek)
         :precondition
         (and
-            (exists (?skad - pole) (postawiony ?k ?skad))
-            (exists (?dokad - pole) 
+            (exists (?miejsce - pomieszczenie) 
                 (and
-                    (somsiad ?skad ?dokad)
-                    (not(exists (?block - klocek) (postawiony ?block ?dokad)))
+                    (human ?miejsce)
+                    (rozwiaz ?miejsce)
                 )
             )
-		)
-		:effect
-		(and
-			(not(postawiony ?k ?skad))
+            (exists (?skad - pole) 
+                (and
+                    (postawiony ?k ?skad)
+                    (exists (?dokad - pole) 
+                        (and
+                            (somsiad ?skad ?dokad)
+                            (not(exists (?block - klocek) (postawiony ?block ?dokad)))
+                        )
+                    )
+                )
+            )
+        )
+        :effect
+        (and
+            (not(postawiony ?k ?skad))
             (postawiony ?k ?dokad)
-		)
+        )
     )
 
     (:action idz
