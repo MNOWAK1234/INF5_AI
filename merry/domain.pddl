@@ -13,6 +13,25 @@
         (moge-isc ?x ?y - pomieszczenie)
 	)
 
+    (:action przesun
+        :parameters (?k - klocek)
+        :precondition
+        (and
+            (exists (?skad - pole) (postawiony ?k ?skad))
+            (exists (?dokad - pole) 
+                (and
+                    (somsiad ?skad ?dokad)
+                    (not(exists (?block - klocek) (postawiony ?block ?dokad)))
+                )
+            )
+		)
+		:effect
+		(and
+			(not(postawiony ?k ?skad))
+            (postawiony ?k ?dokad)
+		)
+    )
+
     (:action idz
         :parameters (?dokad - pomieszczenie)
         :precondition
@@ -26,7 +45,7 @@
                             (exists (?inne - pomieszczenie) 
                                 (exists (?drugie - pomieszczenie)
                                     (and
-                                        (przejscie (?col ?inne ?drugie))
+                                        (przejscie ?col ?inne ?drugie)
                                         (moge-isc ?inne ?drugie)
                                     )
                                 )
@@ -55,22 +74,19 @@
                     (ball ?p ?room)
                 )
             )
+            (exists (?inny - pomieszczenie)
+                (exists (?drugi - pomieszczenie)
+                    (and
+                        (not (moge-isc ?inny ?drugi))
+                        (przejscie ?col ?inny ?drugi)
+                    )
+                )
+            )
         )
         :effect
 		(and
 			(not(ball ?p ?room))
-            (when 
-		        (exists (?pierwszy - pomieszczenie)
-                    (exists (?drugi - pomieszczenie) 
-                        (and
-                            (przejscie ?col ?pierwszy ?drugi)
-                            (not (= ?pierwszy ?drugi))
-                            (not (moge-isc ?pierwszy ?drugi))
-                        )
-                    )
-                );; warunek
-		        (moge-isc ?pierwszy ?drugi) ;; akcja
-	        )
+            (moge-isc ?inny ?drugi)
 		)
     )
 
