@@ -45,6 +45,8 @@
 		(postawiony klocek7 pole7)
 		(postawiony klocek8 pole4)
 
+        (puste pole5)
+
         (somsiad pole1 pole2)
         (somsiad pole1 pole4)
         (somsiad pole2 pole1)
@@ -94,13 +96,13 @@
 	(:goal
 		(and
 		    (postawiony klocek1 pole1)
-		    (postawiony klocek2 pole2)
-		    (postawiony klocek3 pole3)
-		    (postawiony klocek4 pole4)
-		    (postawiony klocek5 pole5)
-		    (postawiony klocek6 pole6)
-		    (postawiony klocek7 pole7)
-		    (postawiony klocek8 pole8)
+		    ;(postawiony klocek2 pole2)
+		    ;(postawiony klocek3 pole3)
+		    ;(postawiony klocek4 pole4)
+		    ;(postawiony klocek5 pole5)
+		    ;(postawiony klocek6 pole6)
+		    ;(postawiony klocek7 pole7)
+		    ;(postawiony klocek8 pole8)
             (human g)
 		)
 	)
