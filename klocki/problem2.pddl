@@ -7,7 +7,7 @@
 		(on-top b a)
 		(on-floor a)
 
-    (clear e)
+    		(clear e)
 		(on-top e d)
 		(on-floor d)
 	)
