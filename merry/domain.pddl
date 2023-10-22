@@ -11,59 +11,36 @@
         (barwa ?x - pilka ?y - kolor)
         (ball ?x - pilka ?y - pomieszczenie)
         (moge-isc ?x ?y - pomieszczenie)
+        (puste ?p - pole)
 	)
 
     (:action przesun
-        :parameters (?k - klocek)
+        :parameters (?k - klocek ?skad ?dokad - pole ?miejsce - pomieszczenie)
         :precondition
         (and
-            (exists (?miejsce - pomieszczenie) 
-                (and
-                    (human ?miejsce)
-                    (rozwiaz ?miejsce)
-                )
-            )
-            (exists (?skad - pole) 
-                (and
-                    (postawiony ?k ?skad)
-                    (exists (?dokad - pole) 
-                        (and
-                            (somsiad ?skad ?dokad)
-                            (not(exists (?block - klocek) (postawiony ?block ?dokad)))
-                        )
-                    )
-                )
-            )
+            (human ?miejsce)
+            (rozwiaz ?miejsce)
+            (postawiony ?k ?skad)
+            (somsiad ?skad ?dokad)
+            (puste ?dokad)
         )
         :effect
         (and
             (not(postawiony ?k ?skad))
+            (puste ?skad)
             (postawiony ?k ?dokad)
+            (not (puste ?dokad))
         )
     )
 
     (:action idz
-        :parameters (?dokad - pomieszczenie)
+        :parameters (?dokad ?skad ?inne ?drugie - pomieszczenie ?col - kolor)
         :precondition
         (and
-            (exists (?skad - pomieszczenie) 
-                (and
-                    (human ?skad)
-                    (exists (?col - kolor) 
-                        (and
-                            (przejscie ?col ?skad ?dokad)
-                            (exists (?inne - pomieszczenie) 
-                                (exists (?drugie - pomieszczenie)
-                                    (and
-                                        (przejscie ?col ?inne ?drugie)
-                                        (moge-isc ?inne ?drugie)
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
+            (human ?skad)
+            (przejscie ?col ?skad ?dokad)
+            (przejscie ?col ?inne ?drugie)
+            (moge-isc ?inne ?drugie)
         )
         :effect
 		(and
@@ -74,24 +51,15 @@
     )
 
     (:action wez
-        :parameters (?col - kolor)
+        :parameters (?col - kolor ?room ?inny ?drugi - pomieszczenie ?p - pilka)
         :precondition
         (and
+            (human ?room)
+            (barwa ?p ?col)
+            (ball ?p ?room)
+            (not (moge-isc ?inny ?drugi))
+            (przejscie ?col ?inny ?drugi)
             (exists (?room - pomieszczenie) (human ?room))
-            (exists (?p - pilka) 
-                (and
-                    (barwa ?p ?col)
-                    (ball ?p ?room)
-                )
-            )
-            (exists (?inny - pomieszczenie)
-                (exists (?drugi - pomieszczenie)
-                    (and
-                        (not (moge-isc ?inny ?drugi))
-                        (przejscie ?col ?inny ?drugi)
-                    )
-                )
-            )
         )
         :effect
 		(and
