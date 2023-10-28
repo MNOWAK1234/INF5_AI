@@ -1,7 +1,7 @@
 (define (problem paczki)
     (:domain port)
     (:objects
-        samochod - auto
+        auto - samochod
         pole1 pole2 pole3 pole4 - miejsce
         one1 two1 three1 three2 four1 - zuraw
         jeden1 jeden2 dwa1 trzy1 trzy2 cztery1 - sterta
