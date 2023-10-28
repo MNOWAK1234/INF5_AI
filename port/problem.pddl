@@ -4,7 +4,6 @@
         auto - samochod
         pole1 pole2 pole3 pole4 - miejsce
         one1 two1 three1 three2 four1 - zuraw
-        jeden1 jeden2 dwa1 trzy1 trzy2 cztery1 - sterta
         a b c d e f paletaA1 paletaA2 paletaB1 paletaC1 paletaC2 paletaD1 - paczka
     )
     (:init
@@ -16,13 +15,6 @@
         (somsiad pole4 pole3)
         (somsiad pole4 pole1)
         (somsiad pole1 pole4)
-        
-        (gdzie-sterta jeden1 pole1)
-        (gdzie-sterta jeden2 pole1)
-        (gdzie-sterta dwa1 pole2)
-        (gdzie-sterta trzy1 pole3)
-        (gdzie-sterta trzy2 pole3)
-        (gdzie-sterta cztery1 pole4)
 
         (gdzie-zuraw one1 pole1)
         (gdzie-zuraw two1 pole2)
@@ -43,6 +35,12 @@
         (miejsce-paczki d pole1)
         (miejsce-paczki e pole1)
         (miejsce-paczki f pole4)
+        (miejsce-paczki paletaA1 pole1)
+        (miejsce-paczki paletaA2 pole1)
+        (miejsce-paczki paletaB1 pole2)
+        (miejsce-paczki paletaC1 pole3)
+        (miejsce-paczki paletaC2 pole3)
+        (miejsce-paczki paletaD1 pole4)
 
         (na-gorze paletaB1)
         (na-gorze paletaC1)
