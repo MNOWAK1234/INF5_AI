@@ -37,6 +37,13 @@
         (na f paletaD1)
         (na c f)
 
+        (miejsce-paczki a pole1)
+        (miejsce-paczki b pole1)
+        (miejsce-paczki c pole4)
+        (miejsce-paczki d pole1)
+        (miejsce-paczki e pole1)
+        (miejsce-paczki f pole4)
+
         (na-gorze paletaB1)
         (na-gorze paletaC1)
         (na-gorze paletaC2)
