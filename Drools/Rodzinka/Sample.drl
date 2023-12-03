@@ -177,3 +177,13 @@ then
     System.out.println($brat.osoby[0].imie + " jest wujkiem " + $matka.osoby[1].imie);
 end
 
+
+
+query "Stryjowie dla osoby" (String imie)
+    $stryj: Relacja(osoby[1].imie == imie, relacja == "stryj")
+end
+
+query "Wujkowie dla osoby" (String imie)
+    $wujek: Relacja(osoby[1].imie == imie, relacja == "wujek")
+end
+
