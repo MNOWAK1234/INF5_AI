@@ -5,21 +5,16 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.logger.*;
 
-
 public class DroolsTest {
 
-    public static final void main(String[] args) {
+	public static final void main(String[] args) {
         try {
             // load up the knowledge base
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
         	KieRuntimeLogger kLogger = ks.getLoggers().newFileLogger(kSession,  "test");
-
             // go !
-            //Pomiar p = new Pomiar(true, 160);
-            //kSession.insert(p);
-            //kSession.fireAllRules();
             Straz s = new Straz();
             kSession.insert(s);
             kSession.fireAllRules();
@@ -28,7 +23,7 @@ public class DroolsTest {
             t.printStackTrace();
         }
     }
-   
+    
     public static class Pozar {
     	public Pozar() {
     		
@@ -61,4 +56,3 @@ public class DroolsTest {
     }
 
 }
-
