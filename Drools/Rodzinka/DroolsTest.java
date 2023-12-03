@@ -4,6 +4,9 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.logger.*;
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class DroolsTest {
 
@@ -27,14 +30,20 @@ public class DroolsTest {
 	public static class Osoba {
 	        public String imie;
 	        public Plec plec;
+	        public List<Relacja> relacje;
 
 	        public Osoba(String imie) {
-	                this.imie=imie;
-	                this.plec=Plec.NIEZNANA;
-	        }       
+	            this.imie = imie;
+	            this.plec = Plec.NIEZNANA;
+	            this.relacje = new ArrayList<>();
+	        }
+
+	        public void dodajRelacje(Relacja relacja) {
+	            this.relacje.add(relacja);
+	        }
 
 	        public String toString() {
-	                return imie;
+	            return imie;
 	        }
 	}
 
@@ -47,6 +56,8 @@ public class DroolsTest {
 	        this.osoby[0]=o1;
 	        this.osoby[1]=o2;
 	        this.relacja=relacja;
+	        o1.dodajRelacje(this);
+	        o2.dodajRelacje(this);
 	    }   
 
 	}
