@@ -112,3 +112,68 @@ then
     insert(matka);
     System.out.println($osoba1.imie + " jest matką " + $osoba2.imie);
 end
+
+
+rule "Babcia"
+when
+    $matka: Relacja(relacja == "matka")
+    $rodzic: Relacja(relacja == "rodzic", osoby[0] == $matka.osoby[1])
+then
+    Relacja babcia = new Relacja($matka.osoby[0], $rodzic.osoby[1], "babcia");
+    insert(babcia);
+    System.out.println($matka.osoby[0].imie + " jest babcia " + $rodzic.osoby[1].imie);
+end
+
+rule "Dziadek"
+when
+    $ojciec: Relacja(relacja == "ojciec")
+    $rodzic: Relacja(relacja == "rodzic", osoby[0] == $ojciec.osoby[1])
+then
+    Relacja dziadek = new Relacja($ojciec.osoby[0], $rodzic.osoby[1], "dziadek");
+    insert(dziadek);
+    System.out.println($ojciec.osoby[0].imie + " jest dziadkiem " + $rodzic.osoby[1].imie);
+end
+
+
+rule "siostra"
+when
+    $rodzic: Relacja(relacja == "matka", osoby[1].plec == Plec.KOBIETA)
+    $rodzic2: Relacja(relacja == "matka", osoby[0] == $rodzic.osoby[0], osoby[1] != $rodzic.osoby[1])
+then
+    Relacja siostra = new Relacja($rodzic.osoby[1], $rodzic2.osoby[1], "siostra");
+    insert(siostra);
+    System.out.println($rodzic.osoby[1].imie + " jest siostra " + $rodzic2.osoby[1].imie);
+end
+
+rule "brat"
+when
+    $rodzic: Relacja(relacja == "matka", osoby[1].plec == Plec.MEZCZYZNA)
+    $rodzic2: Relacja(relacja == "matka", osoby[0] == $rodzic.osoby[0], osoby[1] != $rodzic.osoby[1])
+then
+    Relacja brat = new Relacja($rodzic.osoby[1], $rodzic2.osoby[1], "brat");
+    insert(brat);
+    System.out.println($rodzic.osoby[1].imie + " jest bratem " + $rodzic2.osoby[1].imie);
+end
+
+
+
+rule "Stryj"
+when
+    $ojciec: Relacja(relacja == "ojciec")
+    $brat: Relacja(relacja == "brat", osoby[1] == $ojciec.osoby[0])
+then
+    Relacja stryj = new Relacja($brat.osoby[0], $ojciec.osoby[1], "stryj");
+    insert(stryj);
+    System.out.println($brat.osoby[0].imie + " jest stryjem " + $ojciec.osoby[1].imie);
+end
+
+rule "Wujek"
+when
+    $matka: Relacja(relacja == "matka")
+    $brat: Relacja(relacja == "brat", osoby[1] == $matka.osoby[0])
+then
+    Relacja wujek = new Relacja($brat.osoby[0], $matka.osoby[1], "wujek");
+    insert(wujek);
+    System.out.println($brat.osoby[0].imie + " jest wujkiem " + $matka.osoby[1].imie);
+end
+
