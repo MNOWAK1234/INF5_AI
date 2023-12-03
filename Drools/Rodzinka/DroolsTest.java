@@ -3,6 +3,8 @@ package com.sample;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.kie.api.logger.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +21,25 @@ public class DroolsTest {
         	KieRuntimeLogger kLogger = ks.getLoggers().newFileLogger(kSession,  "test");
             // go !
             kSession.fireAllRules();
+            
+            // Zadanie 7
+            String imieOsoby = "Tomek";
+
+            QueryResults resultsStryj = kSession.getQueryResults("Stryjowie dla osoby", imieOsoby);
+            System.out.println("Stryjowie dla osoby:");
+            for (QueryResultsRow row : resultsStryj) {
+                Relacja stryj = (Relacja) row.get("$stryj");
+                System.out.println(stryj.osoby[0].imie + " jest stryjem " + stryj.osoby[1].imie);
+            }
+
+            QueryResults resultsWujek = kSession.getQueryResults("Wujkowie dla osoby", imieOsoby);
+            System.out.println("\nWujkowie dla osoby:");
+            for (QueryResultsRow row : resultsWujek) {
+                Relacja wujek = (Relacja) row.get("$wujek");
+                System.out.println(wujek.osoby[0].imie + " jest wujkiem " + wujek.osoby[1].imie);
+            }
+            
+            
             kLogger.close();
         } catch (Throwable t) {
             t.printStackTrace();
