@@ -1,4 +1,4 @@
-package com.sample
+package com.sample.rules
  
 import com.sample.DroolsTest.*;
 
@@ -52,5 +52,5 @@ rule "Odjazd Strazy"
 		Straz()
 		not Pozar()
 	then
-		System.out.println("Nara");
+		System.out.println("Odjezdzamy!");
 end
