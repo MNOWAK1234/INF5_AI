@@ -50,3 +50,65 @@ rule "Init"
 		insert(new Relacja(krzysztof,iwona,"rodzic"));
 		
 end
+
+
+rule "Ustal plec"
+when
+    $relacja: Relacja() // Pobranie każdej relacji
+    $osoba1: Osoba(this != null) from $relacja.osoby[0]
+    $osoba2: Osoba(this != null) from $relacja.osoby[1]
+    Osoba(plec == Plec.NIEZNANA) from $relacja.osoby
+then
+    if ($osoba1 != null && $osoba1.plec == Plec.NIEZNANA) {
+        insert($osoba1);
+        modify($osoba1) {
+            plec = $osoba1.imie.matches(".*a$") ? Plec.KOBIETA : Plec.MEZCZYZNA
+        }
+        
+        int liczbaRelacjiOsoba1 = $osoba1.relacje.size();
+        System.out.println("Po ustaleniu płci, osoba 1: " + $osoba1.imie + ", Płeć: " + $osoba1.plec + ", Liczba relacji: " + liczbaRelacjiOsoba1);
+        
+        
+        for (Relacja r : $osoba1.relacje) {
+            update(r);
+        }
+    }
+
+    if ($osoba2 != null && $osoba2.plec == Plec.NIEZNANA) {
+        insert($osoba2);
+        modify($osoba2) {
+            plec = $osoba2.imie.matches(".*a$") ? Plec.KOBIETA : Plec.MEZCZYZNA
+        }
+        
+        int liczbaRelacjiOsoba2 = $osoba2.relacje.size();
+        System.out.println("Po ustaleniu płci, osoba 2: " + $osoba2.imie + ", Płeć: " + $osoba2.plec + ", Liczba relacji: " + liczbaRelacjiOsoba2);
+        
+        
+        for (Relacja r : $osoba2.relacje) {
+            update(r);
+        }
+    }
+end
+
+
+rule "Ojciec"
+when
+    $relacja: Relacja(relacja == "rodzic")
+    $osoba1: Osoba(this != null, plec == Plec.MEZCZYZNA) from $relacja.osoby[0]
+    $osoba2: Osoba(this != null) from $relacja.osoby[1]
+then
+    Relacja ojciec = new Relacja($osoba1, $osoba2, "ojciec");
+    insert(ojciec);
+    System.out.println($osoba1.imie + " jest ojcem " + $osoba2.imie);
+end
+
+rule "Matka"
+when
+    $relacja: Relacja(relacja == "rodzic")
+    $osoba1: Osoba(this != null, plec == Plec.KOBIETA) from $relacja.osoby[0]
+    $osoba2: Osoba(this != null) from $relacja.osoby[1]
+then
+    Relacja matka = new Relacja($osoba1, $osoba2, "matka");
+    insert(matka);
+    System.out.println($osoba1.imie + " jest matką " + $osoba2.imie);
+end
