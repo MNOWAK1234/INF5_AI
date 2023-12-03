@@ -44,3 +44,4 @@ rule "Init"
 		insert(new Relacja(agnieszka,iwona,"rodzic"));
 		insert(new Relacja(krzysztof,jacek,"rodzic"));
 		insert(new Relacja(krzysztof,iwona,"rodzic"));
+end
