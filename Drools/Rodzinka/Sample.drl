@@ -191,13 +191,12 @@ end
 
 rule "Kuzyn"
 when
-    $babcia1: Relacja(relacja == "babcia")
-    $babcia2: Relacja(relacja == "babcia", osoby[0] == $babcia1.osoby[0])
-    $matka1: Relacja(relacja == "matka", osoby[1] == $babcia1.osoby[1])
-    $matka2: Relacja(relacja == "matka", osoby[1] == $babcia2.osoby[1], osoby[0] != $matka1.osoby[0])
+    $rel1: Relacja(relacja == "rodzic")
+    $rel2: Relacja(osoby[1] == $rel1.osoby[0], osoby[0].plec == Plec.KOBIETA, relacja == "rodzic")
+    $rel3: Relacja(osoby[1] != $rel2.osoby[1], osoby[0] == $rel2.osoby[0], relacja == "rodzic")
+    $rel4: Relacja(osoby[0] == $rel3.osoby[1], relacja == "rodzic")
 then
-    Relacja kuzyn = new Relacja($babcia1.osoby[1], $babcia2.osoby[1], "kuzyn");
+    Relacja kuzyn = new Relacja($rel1.osoby[1], $rel4.osoby[1], "kuzyn");
     insert(kuzyn);
-    System.out.println($babcia1.osoby[1].imie + " jest kuzynem " + $babcia2.osoby[1].imie);
+    System.out.println($rel1.osoby[1].imie + " jest kuzynem " + $rel4.osoby[1].imie);
 end
-
