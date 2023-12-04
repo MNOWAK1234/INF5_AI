@@ -187,3 +187,17 @@ query "Wujkowie dla osoby" (String imie)
     $wujek: Relacja(osoby[1].imie == imie, relacja == "wujek")
 end
 
+
+
+rule "Kuzyn"
+when
+    $babcia1: Relacja(relacja == "babcia")
+    $babcia2: Relacja(relacja == "babcia", osoby[0] == $babcia1.osoby[0])
+    $matka1: Relacja(relacja == "matka", osoby[1] == $babcia1.osoby[1])
+    $matka2: Relacja(relacja == "matka", osoby[1] == $babcia2.osoby[1], osoby[0] != $matka1.osoby[0])
+then
+    Relacja kuzyn = new Relacja($babcia1.osoby[1], $babcia2.osoby[1], "kuzyn");
+    insert(kuzyn);
+    System.out.println($babcia1.osoby[1].imie + " jest kuzynem " + $babcia2.osoby[1].imie);
+end
+
