@@ -9,7 +9,7 @@ public class Window {
 		int n = JOptionPane.showOptionDialog(
 				null,							//parent
 				question,						//Dialog message
-				"Jaka_planeta_wariacie?",		//Dialog title
+				"Know your Star Wars planet",		//Dialog title
 				JOptionPane.YES_NO_OPTION,		//option type
 				JOptionPane.QUESTION_MESSAGE,	//message type
 				null,     						//icon
