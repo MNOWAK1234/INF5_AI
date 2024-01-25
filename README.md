@@ -3,4 +3,4 @@
 * Automatic Planning in PDDL
 * Expert Systems using JAVA and DROOLS: Choose your Star Wars vacation planet
 * Neural Networks Jupyter Notebooks
-* GAME ENGINE
+* Game (Pentago with slightly modified rules) Engine 
