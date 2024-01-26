@@ -24,7 +24,7 @@ public class BeastPlayer extends Player {
 
     @Override
     public String getName() {
-        return "Mikołaj Nowak 151813 Wojciech Kot 151879";
+        return "Beast Player: Champion PUT 2024";
     }
 
     public static String StringMove(int x, int y) {
